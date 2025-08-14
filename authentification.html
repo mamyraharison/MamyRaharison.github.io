@@ -2249,7 +2249,7 @@ Token GitHub :`);
                 if (reservation.isConsecutive) {
                     const groupReservations = reservations.filter(r => r.consecutiveGroup === reservation.consecutiveGroup);
                     const totalAmount = groupReservations.reduce((sum, r) => sum + r.amount, 0);
-                    message += `Réservation: ${reservation.slotNumber}/${reservation.totalSlots} créneaux consécutifs\nMontant total: ${totalAmount}€\n`;
+                    message += `Réservation: ${reservation.slotNumber}/${reservation.totalSlots} créneaux consécutifs\nMontant total: ${totalAmount}Ar\n`;
                 } else {
                     message += `Montant: ${reservation.amount}Ar\n`;
                 }
@@ -2327,7 +2327,7 @@ Token GitHub :`);
                     
                     // Log de l'activité
                     logActivity(reservation.paid ? 'Annulation réservation' : 'Paiement réservation', 
-                        `${reservation.client} - ${reservation.time} - ${reservation.amount}€`);
+                        `${reservation.client} - ${reservation.time} - ${reservation.amount}Ar`);
                 }
             }
         }
@@ -2683,15 +2683,15 @@ Token GitHub :`);
             document.getElementById('statsOverview').innerHTML = `
                 <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-lg p-4 text-white">
                     <h4 class="text-sm font-medium opacity-90">Entrées ${periodLabel}</h4>
-                    <p class="text-2xl font-bold">+${totalIncome.toFixed(2)}€</p>
+                    <p class="text-2xl font-bold">+${totalIncome.toFixed(2)}Ar</p>
                 </div>
                 <div class="bg-gradient-to-r from-red-500 to-red-600 rounded-lg p-4 text-white">
                     <h4 class="text-sm font-medium opacity-90">Sorties ${periodLabel}</h4>
-                    <p class="text-2xl font-bold">-${totalExpenses.toFixed(2)}€</p>
+                    <p class="text-2xl font-bold">-${totalExpenses.toFixed(2)}Ar</p>
                 </div>
                 <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg p-4 text-white">
                     <h4 class="text-sm font-medium opacity-90">Bénéfice ${periodLabel}</h4>
-                    <p class="text-2xl font-bold">${netProfit >= 0 ? '+' : ''}${netProfit.toFixed(2)}€</p>
+                    <p class="text-2xl font-bold">${netProfit >= 0 ? '+' : ''}${netProfit.toFixed(2)}Ar</p>
                 </div>
                 <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg p-4 text-white">
                     <h4 class="text-sm font-medium opacity-90">Transactions ${periodLabel}</h4>
@@ -2766,9 +2766,9 @@ Token GitHub :`);
                 return `
                     <tr class="border-b border-gray-100">
                         <td class="py-3 px-4 text-sm text-gray-800">${displayPeriod}</td>
-                        <td class="py-3 px-4 text-right text-sm font-medium text-green-600">+${income.toFixed(2)}€</td>
-                        <td class="py-3 px-4 text-right text-sm font-medium text-red-600">-${expenses.toFixed(2)}€</td>
-                        <td class="py-3 px-4 text-right text-sm font-bold ${evolutionClass}">${balance >= 0 ? '+' : ''}${balance.toFixed(2)}€</td>
+                        <td class="py-3 px-4 text-right text-sm font-medium text-green-600">+${income.toFixed(2)}Ar</td>
+                        <td class="py-3 px-4 text-right text-sm font-medium text-red-600">-${expenses.toFixed(2)}Ar</td>
+                        <td class="py-3 px-4 text-right text-sm font-bold ${evolutionClass}">${balance >= 0 ? '+' : ''}${balance.toFixed(2)}Ar</td>
                         <td class="py-3 px-4 text-right text-sm ${evolutionClass}">
                             <i class="fas ${evolutionIcon} mr-1"></i>${Math.abs(parseFloat(evolution))}%
                         </td>
@@ -2818,9 +2818,9 @@ Token GitHub :`);
                         <td class="py-2 px-4">
                             <span class="px-2 py-1 text-xs font-medium rounded-full ${categoryClass}">${categoryName}</span>
                         </td>
-                        <td class="py-2 px-4 text-right text-sm font-medium ${isIncome ? 'text-green-600' : ''}">${isIncome ? transaction.amount.toFixed(2) + '€' : '-'}</td>
-                        <td class="py-2 px-4 text-right text-sm font-medium ${!isIncome ? 'text-red-600' : ''}">${!isIncome ? transaction.amount.toFixed(2) + '€' : '-'}</td>
-                        <td class="py-2 px-4 text-right text-sm font-bold ${cumulativeBalance >= 0 ? 'text-green-600' : 'text-red-600'}">${cumulativeBalance.toFixed(2)}€</td>
+                        <td class="py-2 px-4 text-right text-sm font-medium ${isIncome ? 'text-green-600' : ''}">${isIncome ? transaction.amount.toFixed(2) + 'Ar' : '-'}</td>
+                        <td class="py-2 px-4 text-right text-sm font-medium ${!isIncome ? 'text-red-600' : ''}">${!isIncome ? transaction.amount.toFixed(2) + 'Ar' : '-'}</td>
+                        <td class="py-2 px-4 text-right text-sm font-bold ${cumulativeBalance >= 0 ? 'text-green-600' : 'text-red-600'}">${cumulativeBalance.toFixed(2)}Ar</td>
                     </tr>
                 `;
             }).join('');
@@ -2829,9 +2829,9 @@ Token GitHub :`);
             const totalsRow = `
                 <tr class="border-t-2 border-gray-300 bg-gray-50 font-bold">
                     <td class="py-3 px-4 text-sm font-bold text-gray-800" colspan="3">TOTAUX</td>
-                    <td class="py-3 px-4 text-right text-sm font-bold text-green-600">+${totalIncome.toFixed(2)}€</td>
-                    <td class="py-3 px-4 text-right text-sm font-bold text-red-600">-${totalExpenses.toFixed(2)}€</td>
-                    <td class="py-3 px-4 text-right text-sm font-bold ${finalBalance >= 0 ? 'text-green-600' : 'text-red-600'}">${finalBalance >= 0 ? '+' : ''}${finalBalance.toFixed(2)}€</td>
+                    <td class="py-3 px-4 text-right text-sm font-bold text-green-600">+${totalIncome.toFixed(2)}Ar</td>
+                    <td class="py-3 px-4 text-right text-sm font-bold text-red-600">-${totalExpenses.toFixed(2)}Ar</td>
+                    <td class="py-3 px-4 text-right text-sm font-bold ${finalBalance >= 0 ? 'text-green-600' : 'text-red-600'}">${finalBalance >= 0 ? '+' : ''}${finalBalance.toFixed(2)}Ar</td>
                 </tr>
             `;
 
@@ -2947,7 +2947,7 @@ Token GitHub :`);
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return context.dataset.label + ': ' + context.parsed.y + '€';
+                                    return context.dataset.label + ': ' + context.parsed.y + 'Ar';
                                 }
                             }
                         }
@@ -2957,7 +2957,7 @@ Token GitHub :`);
                             beginAtZero: true,
                             ticks: {
                                 callback: function(value) {
-                                    return value + '€';
+                                    return value + 'Ar';
                                 }
                             }
                         }
@@ -3110,9 +3110,9 @@ Token GitHub :`);
                 { 'Indicateur': 'Période d\'analyse', 'Valeur': periodLabel },
                 { 'Indicateur': '', 'Valeur': '' },
                 { 'Indicateur': 'FINANCES', 'Valeur': '' },
-                { 'Indicateur': 'Total des recettes', 'Valeur': totalIncome + ' €' },
-                { 'Indicateur': 'Total des dépenses', 'Valeur': totalExpenses + ' €' },
-                { 'Indicateur': 'Bénéfice net', 'Valeur': netProfit + ' €' },
+                { 'Indicateur': 'Total des recettes', 'Valeur': totalIncome + ' Ar' },
+                { 'Indicateur': 'Total des dépenses', 'Valeur': totalExpenses + ' Ar' },
+                { 'Indicateur': 'Bénéfice net', 'Valeur': netProfit + ' Ar' },
                 { 'Indicateur': 'Marge bénéficiaire', 'Valeur': totalIncome > 0 ? ((netProfit / totalIncome) * 100).toFixed(1) + ' %' : '0 %' },
                 { 'Indicateur': '', 'Valeur': '' },
                 { 'Indicateur': 'RÉSERVATIONS', 'Valeur': '' },
@@ -3120,7 +3120,7 @@ Token GitHub :`);
                 { 'Indicateur': 'Réservations payées', 'Valeur': paidReservations },
                 { 'Indicateur': 'Réservations impayées', 'Valeur': unpaidReservations },
                 { 'Indicateur': 'Taux de paiement', 'Valeur': totalReservations > 0 ? ((paidReservations / totalReservations) * 100).toFixed(1) + ' %' : '0 %' },
-                { 'Indicateur': 'Recette moyenne par réservation', 'Valeur': totalReservations > 0 ? (totalIncome / totalReservations).toFixed(2) + ' €' : '0 €' }
+                { 'Indicateur': 'Recette moyenne par réservation', 'Valeur': totalReservations > 0 ? (totalIncome / totalReservations).toFixed(2) + ' Ar' : '0 Ar' }
             ];
 
             const summaryWs = XLSX.utils.json_to_sheet(summaryData);
@@ -4323,7 +4323,7 @@ L'application a été réinitialisée.`);
             const description = prompt('Description de la transaction :');
             if (!description) return;
 
-            const amount = parseFloat(prompt('Montant (€) :'));
+            const amount = parseFloat(prompt('Montant (Ar) :'));
             if (!amount || amount <= 0) return;
 
             const type = confirm('Cliquez OK pour une RECETTE, Annuler pour une DÉPENSE') ? 'income' : 'expense';
@@ -4340,7 +4340,7 @@ L'application a été réinitialisée.`);
             transactions.push(transaction);
             localDB.saveData();
             loadDatabaseTransactions();
-            logActivity('Ajout transaction DB', `${description} - ${amount}€`);
+            logActivity('Ajout transaction DB', `${description} - ${amount}Ar`);
         }
 
         function addNewClient() {
@@ -4357,7 +4357,7 @@ L'application a été réinitialisée.`);
             const newPhone = prompt('Téléphone :', reservation.phone);
             if (newPhone === null) return;
 
-            const newAmount = parseFloat(prompt('Montant (€) :', reservation.amount));
+            const newAmount = parseFloat(prompt('Montant (Ar) :', reservation.amount));
             if (newAmount === null || newAmount <= 0) return;
 
             const newPaid = confirm(`Réservation payée ?\n\nActuel : ${reservation.paid ? 'Oui' : 'Non'}`);
@@ -4380,7 +4380,7 @@ L'application a été réinitialisée.`);
             const newDescription = prompt('Description :', transaction.description);
             if (newDescription === null) return;
 
-            const newAmount = parseFloat(prompt('Montant (€) :', transaction.amount));
+            const newAmount = parseFloat(prompt('Montant (Ar) :', transaction.amount));
             if (newAmount === null || newAmount <= 0) return;
 
             transaction.description = newDescription;
