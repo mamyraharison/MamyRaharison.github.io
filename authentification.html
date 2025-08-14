@@ -2252,7 +2252,7 @@ Token GitHub :`);
                     const totalAmount = groupReservations.reduce((sum, r) => sum + r.amount, 0);
                     message += `Réservation: ${reservation.slotNumber}/${reservation.totalSlots} créneaux consécutifs\nMontant total: ${totalAmount}€\n`;
                 } else {
-                    message += `Montant: ${reservation.amount}€\n`;
+                    message += `Montant: ${reservation.amount}Ar\n`;
                 }
                 
                 message += `Statut: ${reservation.paid ? 'Payé' : 'Réservé'}\n\n`;
